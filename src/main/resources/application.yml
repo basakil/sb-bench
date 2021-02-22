@@ -1,0 +1,14 @@
+
+#server:
+#  tomcat:
+#    threads:
+#      max:  25
+#    accept-count: 25
+
+#server.undertow.worker-threads
+#server.jetty.acceptors
+
+#nom:
+#  aob:
+#    sbbench:
+#      logstring: "Log String"
