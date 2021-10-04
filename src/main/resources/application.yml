@@ -12,3 +12,28 @@
 #  aob:
 #    sbbench:
 #      logstring: "Log String"
+#
+#management:
+#  endpoint:
+#    health:
+#      probes:
+#        enabled: true
+
+management:
+  health:
+    probes:
+      enabled: true
+  endpoints:
+    enabled-by-default: false
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      enabled: true
+
+
+## change management.health.probes.enabled to below, after moving to spring-boot version >= 2.3.2 :
+#  management.endpoint.health.probes.enabled=true
+#  management.health.livenessState.enabled=true
+#  management.health.readinessState.enabled=true
