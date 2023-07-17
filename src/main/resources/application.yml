@@ -8,10 +8,10 @@
 #server.undertow.worker-threads
 #server.jetty.acceptors
 
-#nom:
-#  aob:
-#    sbbench:
-#      logstring: "Log String"
+nom:
+  aob:
+    sbbench:
+      logstring: "Log String 12"
 #
 #management:
 #  endpoint:
@@ -32,7 +32,8 @@ management:
     health:
       enabled: true
 
-
+elasticsearch:
+  url: "192.168.56.101:31200"
 ## change management.health.probes.enabled to below, after moving to spring-boot version >= 2.3.2 :
 #  management.endpoint.health.probes.enabled=true
 #  management.health.livenessState.enabled=true

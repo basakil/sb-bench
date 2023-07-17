@@ -1,5 +1,6 @@
 package nom.aob.sbbench.controller.rest;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import nom.aob.sbbench.model.SimpleResponse;
@@ -26,6 +27,9 @@ public class SimpleRestController {
     @Value("${nom.aob.sbbench.logstring:#{null}}")
     private String logString;
 
+    @Value("${nom.aob.sbbench.logs.stdout:true}")
+    private boolean logs_stdout;
+
     @Autowired
     public SimpleRestController(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
@@ -33,12 +37,10 @@ public class SimpleRestController {
 
     @GetMapping(PATH_SIMPLE)
     public @NonNull ResponseEntity<SimpleResponse> simpleResponse(
-            @RequestHeader(value = "x-b3-traceid", required = false) String traceId) {
+            @RequestHeader(value = "x-b3-traceid", required = false) String traceId) throws JsonProcessingException {
 
 //        log.info("in simpleResponse: " + traceId);
-        if (logString != null) {
-            log.info("in simpleResponse. logString = {}.",logString);
-        }
+
 
         SimpleResponse simpleResponse = Utils.newSimpleResponse(PATH_SIMPLE);
 //                SimpleResponse.builder()
@@ -48,6 +50,15 @@ public class SimpleRestController {
 //                .randomInteger(Utils.newRandomInt())
 //                .threadID(Thread.currentThread().getId())
 //                .build();
+
+        if (logString != null) {
+            String logText = Utils.toJsonString(simpleResponse);
+//            System.out.println("logText="+logText);
+            log.info("{ method: simpleResponse, simpleResponse:{}, logString:\"{}\" }", logText, logString);
+            if (logs_stdout) {
+                System.out.format("{method: simpleResponse, simpleResponse:%s, logString:\"%s\" }\n", logText, logString);
+            }
+        }
 
         return new ResponseEntity<>(simpleResponse, HttpStatus.OK);
     }
