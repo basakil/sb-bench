@@ -7,7 +7,7 @@
     <groupId>nom.aob</groupId>
     <artifactId>sb-bench</artifactId>
     <packaging>jar</packaging>
-    <version>0.14</version>
+    <version>0.15d</version>
     <name>${project.artifactId}</name>
 
     <properties>
@@ -66,7 +66,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-<!--        will -probably- used in the future.. -->
+        <!-- https://mvnrepository.com/artifact/io.micrometer/micrometer-registry-prometheus -->
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+<!--        will -probably- be used in the future.. -->
         <dependency>
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
