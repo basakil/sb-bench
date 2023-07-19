@@ -8,9 +8,6 @@ spec:
   selector:
     matchLabels:
       scrape: actuator-prometheus
-  namespaceSelector:
-    matchNames:
-      - minis
   endpoints:
     - port: http
       path: /actuator/prometheus
