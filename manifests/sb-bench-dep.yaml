@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sb-bench
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sb-bench
+  template:
+    metadata:
+      labels:
+        app: sb-bench
+        sidecar.istio.io/inject: "true"
+      annotations:
+      ## tracing confing may not work, since it is initiated by istio. 
+      ## A global configuration in istio is needed.
+        proxy.istio.io/config: |
+          tracing:
+            sampling: 33.33
+            zipkin:
+              address: "jaeger-simple-collector.observability.svc.cluster.local:9411"
+            #custom_tags:
+            #  my_tag_header:
+            #    header:
+            #      name: host
+    spec:
+      containers:
+      - name: sb-bench
+        image: basakil/sb-bench:0.15d
+        ports:
+        - containerPort: 8080
+        env:
+        - name: MESSAGE
+          value: hello-kubernetes message..
+        - name: LOGGING_FILE_NAME
+          value: "/var/log/sb-bench.log"
+        - name: SPRING_PROFILES_ACTIVE
+          value: "metrics,prometheus"
+        resources:
+          requests:
+            memory: "150Mi"
+            cpu: "60m"
