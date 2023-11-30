@@ -23,7 +23,7 @@
 
         <docker.image.name>${project.artifactId}</docker.image.name>
         <docker.image.tag>${project.version}</docker.image.tag>
-        <jib.registry.to>registry.hub.docker.com</jib.registry.to>
+        <jib.registry.to>registry.hub.docker.com/basakil</jib.registry.to>
         <spring-cloud.version>Hoxton.SR10</spring-cloud.version>
 
 <!--        <google.jib.version>3.4.0</google.jib.version>-->
@@ -109,7 +109,7 @@
                     </from>
                     <to>
 <!--                        <image>registry.hub.docker.com/basakil/${docker.image.name}:${docker.image.tag}</image>-->
-                        <image>${jib.registry.to}/basakil/${docker.image.name}:${docker.image.tag}</image>
+                        <image>${jib.registry.to}/${docker.image.name}:${docker.image.tag}</image>
                         <tags>
                             <tag>latest</tag>
                         </tags>
@@ -130,14 +130,14 @@
                     </extraDirectories>
 
                 </configuration>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>build</goal>
-                        </goals>
-                    </execution>
-                </executions>
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <phase>package</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>build</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
             </plugin>
 
         </plugins>
